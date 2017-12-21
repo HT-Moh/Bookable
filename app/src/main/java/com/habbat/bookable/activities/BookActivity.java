@@ -1,6 +1,5 @@
 package com.habbat.bookable.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,23 +14,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.habbat.bookable.CustomBundlers.ItemBundler;
 import com.habbat.bookable.R;
 import com.habbat.bookable.models.ImageLinks;
 import com.habbat.bookable.models.IndustryIdentifier;
 import com.habbat.bookable.models.Item;
 import com.habbat.bookable.models.VolumeInfo;
+
 import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import icepick.Icepick;
-import icepick.State;
 
 /**
  * Created by hackolos on 21.12.17.
  */
 
-public class BookActivity extends Activity {
+public class BookActivity extends BaseActivity {
 
     @BindView(R.id.booklinearLayout)
     LinearLayout booklinearLayout;
@@ -186,15 +184,13 @@ public class BookActivity extends Activity {
         else {
             subtitle.setVisibility(View.INVISIBLE);
         }
-        averageRating.setText("Average rating: " + volumeinfo.getAverageRating());
-        ratingsCount.setText("Total rating: "+ volumeinfo.getRatingsCount());
-
+        if(volumeinfo!=null && volumeinfo.getAverageRating() instanceof Double && volumeinfo.getAverageRating()>0){
+            averageRating.setText("Average rating: " + volumeinfo.getAverageRating());
+        }
+        if(volumeinfo!=null &&  volumeinfo.getRatingsCount() instanceof Integer && volumeinfo.getRatingsCount()>0){
+            ratingsCount.setText("Total rating: "+ volumeinfo.getRatingsCount());
+        }
     }
-    @Override public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-       // Icepick.saveInstanceState(this, outState);
-    }
-
 
     public void onClick(View widget) {
         if (widget instanceof TextView){

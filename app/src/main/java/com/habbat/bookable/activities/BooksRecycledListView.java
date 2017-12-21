@@ -1,5 +1,5 @@
 package com.habbat.bookable.activities;
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,14 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
-import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
 import com.habbat.bookable.Constants;
-import com.habbat.bookable.CustomBundlers.ListItemBunder;
 import com.habbat.bookable.EndlessRecyclerOnScrollListener;
 import com.habbat.bookable.R;
 import com.habbat.bookable.RxBinding.RxFloatingSearchView;
@@ -31,14 +28,13 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import icepick.Icepick;
-import icepick.State;
+import io.paperdb.Paper;
 import io.reactivex.Observable;
 
 import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
@@ -47,7 +43,7 @@ import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
  * Created by hackolos on 18.12.17.
  */
 
-public class BooksRecycledListView extends Activity  {
+public class BooksRecycledListView extends BaseActivity implements BooksAdapter.OnItemLongClickListener {
 
     private static final String TAG = "BooksRecycledListView";
 
@@ -58,7 +54,7 @@ public class BooksRecycledListView extends Activity  {
     public FloatingSearchView mSearchView;
 
     //Adapter
-    private RecyclerView.Adapter mAdapter;
+    private BooksAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     //@State(ListItemBunder.class)
@@ -74,6 +70,9 @@ public class BooksRecycledListView extends Activity  {
     //Default search text
     private String defaultSearchText = "A";
     private int firstLetter= 65;
+    private Boolean isSearch= false;
+
+    //Inject API Service
     @Inject
     RetrofitNetworkServiceApi retrofitNetworkServiceApi;
 
@@ -147,7 +146,7 @@ public class BooksRecycledListView extends Activity  {
         mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore(){
-                if (firstLetter<90){
+                if (firstLetter<=90){
                     firstLetter++;
                     Character nextLetter = (char)firstLetter++;
                     reactiveCall(Character.toString(nextLetter));
@@ -170,34 +169,49 @@ public class BooksRecycledListView extends Activity  {
                 })
         );
     }
-    @Override public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-       // Icepick.saveInstanceState(this, outState);
-    }
+
     @Override protected void onResume(){
         super.onResume();
+        if (items==null){
+            items=  Paper.book().read("BOOKS");
+        }
         if (items!=null){
             mAdapter = new BooksAdapter(items,this);
             mRecyclerView.setAdapter(mAdapter);
         }
         else {
             reactiveCall(defaultSearchText);
-
         }
+    }
+
+    @Override public boolean onItemLongClicked(int position){
+        if (items!=null &&  items.size()>position){
+            Item item = items.get(position);
+        }
+        return true;
     }
 
 
     public void handleResponse(Volumes response){
         if (response!=null){
-            if (items==null){
-                items = new ArrayList<>();
-            }
-            items.addAll(response.items);
-            items = items.stream().distinct().collect(Collectors.toList());
+//            if (items==null){
+//                items = new ArrayList<>();
+//            }
+           // if (isSearch ){
+                items = response.items;
+                isSearch=false;
+           // }
+//            else {
+//                items.addAll(response.items);
+//                items = items.stream().distinct().collect(Collectors.toList());
+//            }
 
-            mAdapter = new BooksAdapter(items,this);
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    mAdapter.setItems(items);
+
+                }
+            });
 
             //Quick dirty setting :-)
             if (!isSearchPreviewDisabled){
@@ -234,6 +248,7 @@ public class BooksRecycledListView extends Activity  {
     }
     private void SearchViewOnQueryChange(CharSequence query){
         if(query!=null && query.length()>0){
+            isSearch = true;
             reactiveCall(query.toString());
         }
     }
