@@ -8,9 +8,12 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by hackolos on 18.12.17.
+ * DI Component
  */
 @Module
 public abstract class BookableApplicationModule {
     @ContributesAndroidInjector
     abstract MainActivity contributeActivityInjector();
+    @ContributesAndroidInjector
+    abstract BooksRecycledListView contributeBooksActivity();
 }

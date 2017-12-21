@@ -7,6 +7,7 @@ import dagger.Provides;
 
 /**
  * Created by hackolos on 18.12.17.
+ * Module for DI
  */
 
 @Module

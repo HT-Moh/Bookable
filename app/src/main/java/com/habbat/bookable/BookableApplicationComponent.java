@@ -10,5 +10,4 @@ import dagger.android.AndroidInjector;
 
 @Component(modules = {AndroidInjectionModule.class, BookableApplicationModule.class})
 public interface BookableApplicationComponent  extends AndroidInjector<BookableApplication> {
-
 }

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scrollview_background">
+    <LinearLayout
+        android:id="@+id/booklinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/scrollview_background"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv"
+            android:background="#00555555"
+
+        >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:id="@+id/bookPhoto"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="@dimen/activity_padding_primary"
+                    />
+
+                <TextView
+                    android:id="@+id/bookTitle"
+                    android:paddingRight="@dimen/activity_padding_primary"
+                    android:paddingLeft="@dimen/activity_padding_primary"
+                    android:paddingBottom="@dimen/activity_padding_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/bookPhoto"
+                    android:layout_alignParentTop="true"
+                    android:textSize="@dimen/label_size"
+                    android:text="title"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+
+                <TextView
+                    android:id="@+id/authorLabel"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="@dimen/default_label"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bookTitle"
+                    android:layout_toRightOf="@+id/bookPhoto"
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    android:text="Author"
+                    android:textColor="@color/colorPrimary"
+
+                    />
+
+                <TextView
+                    android:id="@+id/author"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bookTitle"
+                    android:layout_toEndOf="@+id/authorLabel"
+                    android:text="Mohamed"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/kindLabel"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="@dimen/default_label"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/author"
+                    android:layout_toEndOf="@+id/bookPhoto"
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    android:text="Kind"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/kind"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/author"
+                    android:layout_toEndOf="@+id/kindLabel"
+                    android:text="Mohamed"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/publisherLabel"
+                    android:paddingTop="@dimen/activity_padding_secondady"
+
+                    android:layout_width="@dimen/secondary_label"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bookPhoto"
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    android:text="Publisher"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/publisherValue"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bookPhoto"
+                    android:layout_toEndOf="@+id/publisherLabel"
+                    android:text="Mohamed"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/publishedDateLabel"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="@dimen/secondary_label"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/publisherLabel"
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    android:text="Published date"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/publishedDateValue"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/publisherLabel"
+                    android:layout_toEndOf="@+id/publishedDateLabel"
+                    android:text="Mohamed"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/publishedDateLabel"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+
+                <TextView
+                    android:id="@+id/industryIdentifiersLabel"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/description"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/readingMode"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/industryIdentifiersLabel"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/pageCount"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/readingMode"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/printType"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pageCount"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/maturityRating"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/printType"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/allowAnonLogging"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/maturityRating"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/panelizationSummary"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/allowAnonLogging"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+
+                <RelativeLayout
+                    android:id="@+id/imageLinks"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/panelizationSummary"
+                    >
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/language"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageLinks"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/previewLink"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/language"
+                    android:textSize="@dimen/label_size"
+                    android:autoLink="all"
+                    android:onClick="onClick"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/infoLink"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/previewLink"
+                    android:textSize="@dimen/label_size"
+                    android:autoLink="all"
+                    android:onClick="onClick"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/canonicalVolumeLink"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/infoLink"
+                    android:textSize="@dimen/label_size"
+                    android:autoLink="all"
+                    android:onClick="onClick"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/canonicalVolumeLink"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/averageRating"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/subtitle"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/ratingsCount"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/averageRating"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorPrimary"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
+

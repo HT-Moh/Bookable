@@ -22,27 +22,29 @@ public final  class Constants {
     }
 
     /**
-     * You client id, you have it from the google console when you register your project
-     * https://console.developers.google.com/a
+     * Client id from google console
      */
     public static final String CLIENT_ID = "335158165520-dhivh6uniatvd0r14rnrkgpc2igg505s.apps.googleusercontent.com";
     /**
-     * The redirect uri you have define in your google console for your project
+     * Redirect url Defined on google consolde
      */
     public static final String REDIRECT_URI = "com.habbat.bookable:oauth2redirect";
     /**
-     * The redirect root uri you have define in your google console for your project
-     * It is also the scheme your Main Activity will react
+     * the redirect root uri and main schema activity
      */
     public static final String REDIRECT_URI_ROOT = "com.habbat.bookable";
 
+    /**
+     * Default credetials from google console
+     */
+
     public static final String KEY = "AIzaSyAxsSeJtwoHPy1vRaZaIvKWYMT5SJvY7eE";
     /**
-     * You are asking to use a code when autorizing
+     * Asking to use a code when autorizing
      */
     public static final String CODE = "code";
     /**
-     * You are receiving an error when autorizing, it's embedded in this field
+     * Error
      */
     public static final String ERROR_CODE = "error";
     /**
@@ -54,8 +56,7 @@ public final  class Constants {
      */
     public static final String GRANT_TYPE_REFRESH_TOKEN = "refresh_token";
     /**
-     * The scope: what do we want to use
-     * Here we want to be able to do anything on the user's GDrive
+     * The scope: Books API
      */
     public static final String API_SCOPE = "https://www.googleapis.com/auth/books";
     /**

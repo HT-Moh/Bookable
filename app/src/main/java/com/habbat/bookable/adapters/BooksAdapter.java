@@ -17,6 +17,7 @@ import com.habbat.bookable.models.VolumeInfo;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by hackolos on 18.12.17.
@@ -34,7 +35,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
     }
     @Override
     public int getItemCount() {
-        return items.size();
+        return items==null? 0:items.size();
     }
     @Override
     public Book onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -47,12 +48,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
     public void onBindViewHolder(Book bookHolder, int i) {
         VolumeInfo volumeinfo = items.get(i).getVolumeInfo();
         bookHolder.title.setText(volumeinfo.getTitle());
-        bookHolder.author.setText(volumeinfo.getAuthors().get(0));
-        if(volumeinfo.getImageLinks().getSmallThumbnail()!=null){
+        bookHolder.author.setText((volumeinfo!=null && volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)?volumeinfo.getAuthors().get(0):"");
+        if(volumeinfo!=null && volumeinfo.getImageLinks()!=null && volumeinfo.getImageLinks().getSmallThumbnail()!=null){
             Glide.with(context)
                     .load(volumeinfo.getImageLinks().getSmallThumbnail())
                     .into(bookHolder.bookPhoto);
         }
+        bookHolder.kind.setText(items.get(i).getKind());
     }
 
     @Override
@@ -67,15 +69,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
         TextView title;
         @BindView(R.id.author)
         TextView author;
+        @BindView(R.id.kind)
+        TextView kind;
         @BindView(R.id.bookPhoto)
         ImageView bookPhoto;
 
         Book(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            title = (TextView)itemView.findViewById(R.id.bookTitle);
-            author = (TextView)itemView.findViewById(R.id.author);
-            bookPhoto = (ImageView)itemView.findViewById(R.id.bookPhoto);
+            ButterKnife.bind(this, itemView);
         }
     }
 

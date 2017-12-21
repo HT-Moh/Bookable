@@ -6,6 +6,7 @@ import dagger.Component;
 
 /**
  * Created by hackolos on 18.12.17.
+ * Component for DI
  */
 
 @Singleton
