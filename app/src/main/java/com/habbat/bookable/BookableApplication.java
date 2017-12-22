@@ -1,7 +1,7 @@
 package com.habbat.bookable;
 
 /**
- * Created by hackolos on 15.12.17.
+ * Created by HT-Moh on 15.12.17.
  */
 import android.app.Activity;
 import android.app.Application;

@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  */
 
 public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
@@ -73,13 +73,13 @@ public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
         if (context instanceof MainActivity){
             return volumes.subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .delay(2,TimeUnit.SECONDS)
+                    //.delay(2,TimeUnit.SECONDS)
                     .subscribe(response -> ((MainActivity)context).handleResponse(response), error -> ((MainActivity)context).handleError(error));
         }
         else {
             return volumes.subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .delay(2,TimeUnit.SECONDS)
+                   // .delay(2,TimeUnit.SECONDS)
                     .subscribe(response -> ((BooksRecycledListView)context).handleResponse(response), error -> ((BooksRecycledListView)context).handleError(error));
         }
     }

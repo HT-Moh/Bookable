@@ -1,17 +1,15 @@
-package com.habbat.bookable.retrofit;
-
-/**
- * Created by hackolos on 15.12.17.
+package com.habbat.bookable.retrofit; /**
+ * Bookable: Google book API
+ * Created by HT-Moh on 15.12.17.
+ * www.habbat.ch Habbat C&D
  */
 
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.habbat.bookable.BookableApplication;
-import com.habbat.bookable.activities.MainActivity;
 import java.io.IOException;
+
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

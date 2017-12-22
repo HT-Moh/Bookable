@@ -307,6 +307,18 @@
                     android:textSize="@dimen/label_size"
                     android:textColor="@color/colorPrimary"
                     />
+
+                <Button
+                    android:id="@+id/shareBook"
+                    android:layout_width="match_parent"
+                    android:layout_margin="30dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/ratingsCount"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/search_input_background_color"
+                    android:onClick="onClick"
+                    android:textSize="18sp"
+                    android:text="Share with friends"/>
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>

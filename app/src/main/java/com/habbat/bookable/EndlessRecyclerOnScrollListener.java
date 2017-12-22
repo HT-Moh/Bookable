@@ -1,7 +1,7 @@
 package com.habbat.bookable;
 
 /**
- * Created by hackolos on 21.12.17.
+ * Created by HT-Moh on 21.12.17.
  */
 
 import android.support.v7.widget.LinearLayoutManager;

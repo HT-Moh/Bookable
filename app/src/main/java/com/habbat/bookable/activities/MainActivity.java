@@ -1,19 +1,20 @@
 package com.habbat.bookable.activities;
+
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.habbat.bookable.Constants;
 import com.habbat.bookable.R;
 import com.habbat.bookable.models.Item;
@@ -29,7 +30,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import de.cketti.mailto.EmailIntentBuilder;
 import io.paperdb.Paper;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_ll)
     LinearLayout mainLL;
     AnimationDrawable animationDrawable = null;
+    @BindView(R.id.internetStatus)
+    TextView internetStatus = null;
     //Items of books
     List<Item> items = null;
     //First alphabet
@@ -55,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
     //Inject API Service
     @Inject
     RetrofitNetworkServiceApi retrofitNetworkServiceApi;
-    /***********************************************************
-     *  Managing LifeCycle
-     **********************************************************/
+
+    private Disposable networkDisposable;
+    private Disposable internetDisposable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,28 +74,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Paper.init(this);
+
+
         animationDrawable = (AnimationDrawable) mainLL.getBackground();
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
-
-        getVolumesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startBookActivity(false);
-            }
+        getVolumesBtn.setOnClickListener((View v) -> {
+            startBookActivity(false);
         });
 
-        getVolumesBtnOAuth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startLoginActivity();
-            }
+        getVolumesBtnOAuth.setOnClickListener((View v) -> {
+            startLoginActivity();
         });
+
         txvResult.setMovementMethod(new ScrollingMovementMethod());
         items = Paper.book().read("BOOKS");
         if (items==null){
             for (int i=firstLetter; i<90;i++){
                 reactiveCall(Character.toString((char)i));
+            }
+        }
+        else {
+            //Navigate to books after OAuth
+            if(getIntent().getBooleanExtra("NAVIGATE_TO_BOOKS",false)){
+                startBookActivity(true);
             }
         }
 
@@ -103,6 +113,21 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (animationDrawable != null && !animationDrawable.isRunning())
             animationDrawable.start();
+
+        networkDisposable = ReactiveNetwork.observeNetworkConnectivity(getApplicationContext())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(connectivity -> {
+                    Log.d(TAG, connectivity.toString());
+                    final NetworkInfo.State state = connectivity.getState();
+                    final String name = connectivity.getTypeName();
+                    internetStatus.setText(String.format("state: %s, typeName: %s", state, name));
+                });
+
+        internetDisposable = ReactiveNetwork.observeInternetConnectivity()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> internetStatus.setText( isConnected?"Info":"No internet connection is available"));
     }
 
     @Override
@@ -110,6 +135,15 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if (animationDrawable != null && animationDrawable.isRunning())
             animationDrawable.stop();
+        safelyDispose(networkDisposable, internetDisposable);
+
+    }
+    private void safelyDispose(Disposable... disposables) {
+        for (Disposable subscription : disposables) {
+            if (subscription != null && !subscription.isDisposed()) {
+                subscription.dispose();
+            }
+        }
     }
     @Override
     public void finish() {
@@ -157,9 +191,9 @@ public class MainActivity extends AppCompatActivity {
             }
             items.addAll(response.items);
             items = items.stream().distinct().collect(Collectors.toList());
-            //if(numberOfCalls==90-65){
-                Paper.book().write("BOOKS", items);
-            //}
+            //TODO
+            //we copy the items to prevent thread lock
+            Paper.book().write("BOOKS", new ArrayList<>(items));
         }
         numberOfCalls++;
         Log.e(TAG, "Number of calls : " + numberOfCalls);
@@ -170,5 +204,13 @@ public class MainActivity extends AppCompatActivity {
         if(error!=null && error.getMessage()!=null){
             Log.e(TAG,error.getMessage());
         }
+    }
+    public void sendMail(View widget) {
+        EmailIntentBuilder.from(this)
+                .to("mohamedhabbat@icloud.com")
+                .cc("mohamed@habbat.ch")
+                .subject("Bookable App - Github")
+                .body("Hello\n")
+                .start();
     }
 }

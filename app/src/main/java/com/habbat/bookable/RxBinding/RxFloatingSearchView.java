@@ -1,7 +1,7 @@
 package com.habbat.bookable.RxBinding;
 
 /**
- * Created by hackolos on 20.12.17.
+ * Created by HT-Moh on 20.12.17.
  */
 
 import android.support.annotation.CheckResult;

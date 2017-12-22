@@ -7,7 +7,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  * DI Component
  */
 @Module

@@ -1,7 +1,7 @@
 package com.habbat.bookable.activities;
 
 /**
- * Created by hackolos on 15.12.17.
+ * Created by HT-Moh on 15.12.17.
  * Login activity that manages google OAuth2
  *
  */
@@ -15,9 +15,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.habbat.bookable.Constants;
+import com.habbat.bookable.R;
 import com.habbat.bookable.retrofit.OAuthServer;
 import com.habbat.bookable.retrofit.OAuthToken;
-import com.habbat.bookable.R;
 import com.habbat.bookable.retrofit.RetrofitBuilder;
 
 import okhttp3.HttpUrl;
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             //Launch Book activity
             else {
                 Log.e(TAG, "onCreate: Token available, just launch Book Activity");
-                startBookActivity(true);
+                startMainActivity(true,true);
             }
         }
     }
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "The call refreshTokenFormUrl succeed with code=" + response.code() + " and has body = " + response.body());
                 //ok we have the token
                 response.body().save();
-                startMainActivity(true);
+                startMainActivity(true,true);
             }
 
             @Override
@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "The call getRequestTokenFormCall succeed with code=" + response.code() + " and has body = " + response.body());
                 //ok we have the token
                 response.body().save();
-                startMainActivity(true);
+                startMainActivity(true,true);
             }
 
             @Override
@@ -183,12 +183,15 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Start the next activity
      */
-    private void startMainActivity(boolean newtask) {
+    private void startMainActivity(boolean newtask,boolean goToBooks) {
         Intent i = new Intent(this, MainActivity.class);
         if(newtask){
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
         i.putExtra("GETVOLUMESWITHOAUTH",true);
+        if (goToBooks){
+            i.putExtra("NAVIGATE_TO_BOOKS",true);
+        }
         startActivity(i);
         finish();
     }

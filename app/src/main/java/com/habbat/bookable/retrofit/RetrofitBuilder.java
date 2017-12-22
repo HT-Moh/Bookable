@@ -1,13 +1,16 @@
-package com.habbat.bookable.retrofit;
-
-/**
- * Created by hackolos on 15.12.17.
+package com.habbat.bookable.retrofit; /**
+ * Bookable: Google book API
+ * Created by HT-Moh on 15.12.17.
+ * www.habbat.ch Habbat C&D
  */
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import java.io.File;
+
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -31,7 +34,7 @@ public class RetrofitBuilder {
     public static OAuthServer getSimpleClient(Context ctx, Boolean RxJavaAdapter) {
 
         //Using Default HttpClient
-        Retrofit retrofit = null;
+        Retrofit retrofit;
         if (RxJavaAdapter){
             retrofit= new Retrofit.Builder()
                     .client(getSimpleOkHttpClient(ctx))
@@ -49,8 +52,8 @@ public class RetrofitBuilder {
                     .baseUrl(BASE_URL)
                     .build();
         }
-        OAuthServer webServer = retrofit.create(OAuthServer.class);
-        return webServer;
+
+        return retrofit.create(OAuthServer.class);
     }
 
     /**
@@ -59,7 +62,7 @@ public class RetrofitBuilder {
      * @param ctx
      * @return OAuthServer instance
      */
-    public static OAuthServer getOAuthClient(Context ctx) {
+    protected static OAuthServer getOAuthClient(Context ctx) {
         // now it's using the cach
         // Using my HttpClient
         Retrofit raCustom = new Retrofit.Builder()
@@ -70,13 +73,9 @@ public class RetrofitBuilder {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        OAuthServer webServer = raCustom.create(OAuthServer.class);
-        return webServer;
+        return raCustom.create(OAuthServer.class);
     }
 
-    /***********************************************************
-     * OkHttp Clients
-     **********************************************************/
 
     /**
      * Return a simple OkHttpClient v:
@@ -85,7 +84,7 @@ public class RetrofitBuilder {
      * @param ctx
      */
     @NonNull
-    public static OkHttpClient getSimpleOkHttpClient(Context ctx) {
+    private static OkHttpClient getSimpleOkHttpClient(Context ctx) {
         // Define the OkHttp Client with its cache!
         // Assigning a CacheDirectory
         File myCacheDir=new File(ctx.getCacheDir(),"OkHttpCache");
@@ -97,7 +96,7 @@ public class RetrofitBuilder {
         return new OkHttpClient.Builder()
                 //add a cache
                   .cache(cacheDir)
-                .addInterceptor(httpLogInterceptor)
+                //.addInterceptor(httpLogInterceptor)
                 .build();
     }
 
@@ -110,7 +109,7 @@ public class RetrofitBuilder {
      * @return
      */
     @NonNull
-    public static OkHttpClient getOAuthOkHttpClient(Context ctx) {
+    private static OkHttpClient getOAuthOkHttpClient(Context ctx) {
         // Define the OkHttp Client with its cache!
         // Assigning a CacheDirectory
         File myCacheDir=new File(ctx.getCacheDir(),"OkHttpCache");
@@ -124,7 +123,7 @@ public class RetrofitBuilder {
         return new OkHttpClient.Builder()
                 .cache(cacheDir)
                 .addInterceptor(oAuthInterceptor)
-                .addInterceptor(httpLogInterceptor)
+               // .addInterceptor(httpLogInterceptor)
                 .build();
     }
 }

@@ -7,7 +7,7 @@ import com.habbat.bookable.Constants;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  */
 
 public interface RetrofitNetworkService {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,37 +16,57 @@
         android:layout_height="wrap_content"
         android:text="Google Books API"
         android:textAlignment="center"
-        android:layout_margin="30dp"
+        android:gravity="center"
+        android:layout_margin="20dp"
         android:textColor="@color/search_input_background_color"
         android:textSize="@dimen/main_title"
-
         />
     <Button
         android:id="@+id/getYourVolumes"
         android:layout_width="match_parent"
-        android:layout_margin="30dp"
-        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_height="60dp"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/search_input_background_color"
         android:text="Get books (OAuth2 sign in)"/>
     <Button
         android:id="@+id/getVolumes"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="60dp"
         android:textColor="@color/search_input_background_color"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Get books"/>
     <TextView
-        android:id="@+id/txvResult"
+        android:id="@+id/internetStatus"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:scrollbars="vertical"
         android:text="@string/info"
-        android:textSize="@dimen/main_text_size"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
+        />
+    <TextView
+        android:id="@+id/txvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical"
+        android:text="@string/info"
+        android:textSize="18sp"
         android:textColor="@color/search_input_background_color"
         />
-
+    <Button
+        android:id="@+id/sendMail"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/search_input_background_color"
+        android:onClick="sendMail"
+        android:textSize="18sp"
+        android:text="Contact me"/>
 </LinearLayout>

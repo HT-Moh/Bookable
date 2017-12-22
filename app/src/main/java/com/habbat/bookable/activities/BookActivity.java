@@ -1,5 +1,6 @@
 package com.habbat.bookable.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,7 +8,9 @@ import android.os.Bundle;
 import android.provider.Browser;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.habbat.bookable.R;
+import com.habbat.bookable.helpers.ShareClass;
 import com.habbat.bookable.models.ImageLinks;
 import com.habbat.bookable.models.IndustryIdentifier;
 import com.habbat.bookable.models.Item;
@@ -22,17 +26,23 @@ import com.habbat.bookable.models.VolumeInfo;
 
 import org.parceler.Parcels;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by hackolos on 21.12.17.
+ * Created by HT-Moh on 21.12.17.
  */
 
 public class BookActivity extends BaseActivity {
 
+    private static final String TAG = "BookActivity" ;
     @BindView(R.id.booklinearLayout)
     LinearLayout booklinearLayout;
+
 
     @BindView(R.id.cv)
     CardView cv;
@@ -86,11 +96,11 @@ public class BookActivity extends BaseActivity {
     TextView averageRating;
     @BindView(R.id.ratingsCount)
     TextView ratingsCount;
-
-
-
     //@State(ItemBundler.class)
-    Item item;
+
+    //The book
+    private Item item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,12 +108,12 @@ public class BookActivity extends BaseActivity {
         setContentView(R.layout.activity_book);
         ButterKnife.bind(this);
         //cv.setAlpha(0.3f);
-        //TODO move all hardcoded text
-        Item item = Parcels.unwrap(getIntent().getParcelableExtra("BOOK"));
+        //TODO move all hardcoded text to constants class
+        item = Parcels.unwrap(getIntent().getParcelableExtra("BOOK"));
         VolumeInfo volumeinfo = item.getVolumeInfo();
         title.setText(volumeinfo.getTitle());
-        author.setText((volumeinfo!=null && volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)?volumeinfo.getAuthors().get(0):"");
-        if(volumeinfo!=null && volumeinfo.getImageLinks()!=null && volumeinfo.getImageLinks().getSmallThumbnail()!=null){
+        author.setText((volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)?volumeinfo.getAuthors().get(0):"");
+        if(volumeinfo.getImageLinks()!=null && volumeinfo.getImageLinks().getSmallThumbnail()!=null){
             Glide.with(this)
                     .load(volumeinfo.getImageLinks().getSmallThumbnail())
                     .into(bookPhoto);
@@ -177,7 +187,7 @@ public class BookActivity extends BaseActivity {
 
         infoLink.setText("Info link:\n " + volumeinfo.getInfoLink());
         canonicalVolumeLink.setText("Canonical volume link:\n" + volumeinfo.getCanonicalVolumeLink());
-        if(volumeinfo.getSubtitle()!=null){
+        if(volumeinfo.getSubtitle()!=null && volumeinfo.getSubtitle().length()>0){
             subtitle.setText("Subtitle: " + volumeinfo.getSubtitle());
             subtitle.setVisibility(View.VISIBLE);
         }
@@ -193,12 +203,23 @@ public class BookActivity extends BaseActivity {
     }
 
     public void onClick(View widget) {
-        if (widget instanceof TextView){
-            TextView tmp = (TextView) widget;
-            Uri uri = Uri.parse(tmp.getText().toString());
-            Context context = widget.getContext();
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
+        if (widget instanceof Button){
+            VolumeInfo volumeinfo = item.getVolumeInfo();
+            //TODO the following code to be moved to helper class
+            String data ="Book title" + volumeinfo.getTitle() +"\n";
+            data += (volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)? "Author: "+volumeinfo.getAuthors().get(0)+"\n":"";
+            //data += "Preview link:\n " +
+            String prvlink = null;
+            try {
+                prvlink = URLEncoder.encode(volumeinfo.getPreviewLink(),java.nio.charset.StandardCharsets.UTF_8.toString());
+            }
+            catch(UnsupportedEncodingException e){ // Catch the encoding exception
+                e.printStackTrace();
+            }
+            if(prvlink!=null){
+                data +=prvlink;
+            }
+            ShareClass.getInstance().facebook(data,prvlink,this);
         }
     }
     private void setupImagesView(ImageLinks imageLinksValues){

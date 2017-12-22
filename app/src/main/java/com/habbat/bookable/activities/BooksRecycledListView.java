@@ -40,7 +40,7 @@ import io.reactivex.Observable;
 import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  */
 
 public class BooksRecycledListView extends BaseActivity implements BooksAdapter.OnItemLongClickListener {
@@ -59,6 +59,9 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
 
     //@State(ListItemBunder.class)
     List<Item> items = null;
+    //First book list
+    List<Item> longListOfBooks = null;
+
     //User key or Oauth token
     private Boolean isOAuth = false;
 
@@ -70,7 +73,6 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
     //Default search text
     private String defaultSearchText = "A";
     private int firstLetter= 65;
-    private Boolean isSearch= false;
 
     //Inject API Service
     @Inject
@@ -105,14 +107,10 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
         queryObservable.doOnNext(query -> SearchViewOnQueryChange(query)).subscribe();
 
 
-        mSearchView.setOnHomeActionClickListener(
-                new FloatingSearchView.OnHomeActionClickListener() {
-                    @Override
-                    public void onHomeClicked(){
-                        Log.d(TAG, "onHomeClicked()");
-                    }
-
-                });
+        mSearchView.setOnHomeActionClickListener(() -> {
+                    Log.d(TAG, "onHomeClicked()");
+                }
+        );
 
         SharedPreferences sp = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
         isSearchPreviewDisabled = sp.getBoolean(DISABLE_SEARCH_PREVIEW,true);
@@ -173,7 +171,10 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
     @Override protected void onResume(){
         super.onResume();
         if (items==null){
+            //using DB to speed up the first loading instead of network
             items=  Paper.book().read("BOOKS");
+            //Make a copy - using memory to speed the loading in the future
+            longListOfBooks = new ArrayList<>(items);
         }
         if (items!=null){
             mAdapter = new BooksAdapter(items,this);
@@ -194,22 +195,11 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
 
     public void handleResponse(Volumes response){
         if (response!=null){
-//            if (items==null){
-//                items = new ArrayList<>();
-//            }
-           // if (isSearch ){
-                items = response.items;
-                isSearch=false;
-           // }
-//            else {
-//                items.addAll(response.items);
-//                items = items.stream().distinct().collect(Collectors.toList());
-//            }
+            items = response.items;
 
             runOnUiThread(new Runnable() {
                 @Override public void run() {
                     mAdapter.setItems(items);
-
                 }
             });
 
@@ -248,8 +238,12 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
     }
     private void SearchViewOnQueryChange(CharSequence query){
         if(query!=null && query.length()>0){
-            isSearch = true;
             reactiveCall(query.toString());
+        }
+        else if(longListOfBooks!=null) {
+            items.clear();
+            items.addAll(longListOfBooks);
+            mAdapter.setItems(items);
         }
     }
 

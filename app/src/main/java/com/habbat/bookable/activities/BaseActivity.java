@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.habbat.bookable.R;
 
 /**
- * Created by hackolos on 21.12.17.
+ * Created by HT-Moh on 21.12.17.
  */
 
 public class BaseActivity extends Activity {

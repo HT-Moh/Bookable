@@ -5,7 +5,7 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  */
 
 @Component(modules = {AndroidInjectionModule.class, BookableApplicationModule.class})

@@ -9,7 +9,7 @@ import org.parceler.Parcels;
 import icepick.Bundler;
 
 /**
- * Created by hackolos on 21.12.17.
+ * Created by HT-Moh on 21.12.17.
  */
 
 public class ItemBundler implements Bundler<Item> {

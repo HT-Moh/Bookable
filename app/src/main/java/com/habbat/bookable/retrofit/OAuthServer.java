@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- * Created by hackolos on 15.12.17.
+ * Created by HT-Moh on 15.12.17.
  */
 
 public interface OAuthServer {

@@ -1,11 +1,12 @@
 
 package com.habbat.bookable.models;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
+
+import java.util.List;
 
 @Parcel
 public class VolumeInfo {

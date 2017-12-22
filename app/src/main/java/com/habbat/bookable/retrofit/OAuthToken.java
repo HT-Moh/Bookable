@@ -1,7 +1,8 @@
 package com.habbat.bookable.retrofit;
-
 /**
- * Created by hackolos on 15.12.17.
+ * Bookable: Google book API
+ * Created by HT-Moh on 15.12.17.
+ * www.habbat.ch Habbat C&D
  */
 
 import android.content.Context;
@@ -64,7 +65,7 @@ public class OAuthToken {
         ed.putString(SP_TOKEN_TYPE_KEY, tokenType);
         ed.putLong(SP_TOKEN_EXPIRED_AFTER_KEY, expiredAfterMilli);
         ed.putString(SP_REFRESH_TOKEN_KEY, refreshToken);
-        ed.commit();
+        ed.apply();
     }
 
 
@@ -139,7 +140,7 @@ public class OAuthToken {
                     //flush token in the SP
                     SharedPreferences.Editor ed = sp.edit();
                     ed.putString(SP_TOKEN_KEY, null);
-                    ed.commit();
+                    ed.apply();
                     //rebuild the object according to the SP
                     OAuthToken oauthToken = new OAuthToken();
                     oauthToken.setAccessToken(null);

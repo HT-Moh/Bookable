@@ -8,7 +8,7 @@
     <string name="http_code_403">the server got the request but refuse to run it,  at the contrary of 401 error, authentication won\'t make the difference</string>
     <string name="http_code_404">Source not found.</string>
     <string name="loginactivity_grantsfails_quit">Ok, the application can not work if you don\'t give us the grants to access to your account. Sorry we quit.</string>
-    <string name="info">Bookable is small App that demostrate the use of Google Books API.\n\nThe API calls can be triggered directly using default credentials key registered on the App Or you can authorize the App to use google OAuth2\n\n\nAuthor: Mohamed Habbat
+    <string name="info">Bookable is small App that demostrate the use of Google Books API.\n\nThe API calls can be triggered directly using default credentials key registered on the App Or you can authorize the App to use google OAuth2\n\n\nAuthor: HT-Moh
     </string>
 
 </resources>

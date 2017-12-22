@@ -1,7 +1,7 @@
 package com.habbat.bookable;
 
 /**
- * Created by hackolos on 18.12.17.
+ * Created by HT-Moh on 18.12.17.
  */
 
 public final  class Constants {
