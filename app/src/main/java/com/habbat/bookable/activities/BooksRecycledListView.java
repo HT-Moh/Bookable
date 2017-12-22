@@ -237,6 +237,7 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
         Log.e(TAG,error.getMessage());
     }
     private void SearchViewOnQueryChange(CharSequence query){
+        //TODO Optimize the search -> remove uncomplete requests from the queue
         if(query!=null && query.length()>0){
             reactiveCall(query.toString());
         }
