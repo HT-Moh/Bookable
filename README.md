@@ -1,5 +1,7 @@
 # Bookable
-![](https://github.com/HT-Moh/Bookable/blob/master/Screenshot_01.png | width=200)
+
+<img src="https://github.com/HT-Moh/Bookable/blob/master/Screenshot_01.png" alt="Bookable" width="200">
+
 - The app displays list of books using Google API 
 - App support OAuth2 for Google API calls
 - Search books
