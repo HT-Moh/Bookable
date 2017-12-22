@@ -8,7 +8,7 @@
 - Share a book on FB
 
 
-##Developement stack
+## Developement stack
 
 - Dagger2 for Dependency Injection
 - RxJava - ReactiveNetwork
