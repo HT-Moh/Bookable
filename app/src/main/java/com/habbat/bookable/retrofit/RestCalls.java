@@ -14,7 +14,7 @@ import retrofit2.http.Query;
  * Created by HT-Moh on 15.12.17.
  */
 
-public interface OAuthServer {
+public interface RestCalls {
     @FormUrlEncoded
     @POST("oauth2/v4/token")
     Call<OAuthToken> requestTokenForm(

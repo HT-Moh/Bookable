@@ -8,6 +8,7 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by HT-Moh on 18.12.17.
+ *
  */
 
 public interface RetrofitNetworkService {

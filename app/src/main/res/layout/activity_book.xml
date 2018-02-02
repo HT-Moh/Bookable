@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/scrollview_background">
@@ -20,306 +20,444 @@
 
         >
 
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 >
 
                 <ImageView
+                    android:id="@+id/bookPhoto"
                     android:layout_width="@dimen/image_width"
                     android:layout_height="@dimen/image_height"
-                    android:id="@+id/bookPhoto"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginEnd="@dimen/activity_padding_primary"
-                    />
+                   />
 
                 <TextView
                     android:id="@+id/bookTitle"
-                    android:paddingRight="@dimen/activity_padding_primary"
-                    android:paddingLeft="@dimen/activity_padding_primary"
-                    android:paddingBottom="@dimen/activity_padding_primary"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/bookPhoto"
                     android:layout_alignParentTop="true"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/bookPhoto"
+                    android:paddingBottom="@dimen/activity_padding_primary"
+                    android:paddingLeft="@dimen/activity_padding_primary"
+                    android:paddingRight="@dimen/activity_padding_primary"
                     android:text="title"
                     android:textColor="@color/colorPrimaryDark"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/authorLabel"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="@dimen/default_label"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bookTitle"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toRightOf="@+id/bookPhoto"
-                    android:textSize="@dimen/label_size"
-                    android:textStyle="bold"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Author"
                     android:textColor="@color/colorPrimary"
 
-                    />
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
 
                 <TextView
                     android:id="@+id/author"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bookTitle"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/authorLabel"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Mohamed"
-                    android:textSize="@dimen/label_size"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/authorLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
+
                 <TextView
                     android:id="@+id/kindLabel"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="@dimen/default_label"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/author"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/bookPhoto"
-                    android:textSize="@dimen/label_size"
-                    android:textStyle="bold"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Kind"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/authorLabel" />
 
                 <TextView
                     android:id="@+id/kind"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/author"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/kindLabel"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Mohamed"
-                    android:textSize="@dimen/label_size"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/kindLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/author" />
 
                 <TextView
                     android:id="@+id/publisherLabel"
-                    android:paddingTop="@dimen/activity_padding_secondady"
-                    android:paddingLeft="@dimen/activity_padding_primary"
                     android:layout_width="@dimen/secondary_label"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bookPhoto"
-                    android:textSize="@dimen/label_size"
-                    android:textStyle="bold"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Publisher"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/kindLabel" />
 
                 <TextView
                     android:id="@+id/publisherValue"
-                    android:padding="@dimen/activity_padding_secondady"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bookPhoto"
-                    android:layout_toEndOf="@+id/publisherLabel"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Mohamed"
-                    android:textSize="@dimen/label_size"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/publisherLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/kind" />
 
                 <TextView
                     android:id="@+id/publishedDateLabel"
-                    android:padding="@dimen/activity_padding_primary"
-                    android:paddingTop="20dp"
                     android:layout_width="@dimen/secondary_label"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/publisherLabel"
-                    android:textSize="@dimen/label_size"
-                    android:textStyle="bold"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:text="Published date"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/publisherValue" />
 
                 <TextView
                     android:id="@+id/publishedDateValue"
-                    android:padding="@dimen/activity_padding_primary"
-                    android:paddingTop="20dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/publisherLabel"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/publishedDateLabel"
-                    android:text="Mohamed"
-                    android:textSize="@dimen/label_size"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:text="ssssssssssssssssss"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintBaseline_toBaselineOf="@id/publishedDateLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintStart_toEndOf="@+id/publishedDateLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/publisherValue" />
 
                 <TextView
                     android:id="@+id/description"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/publishedDateLabel"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:text="dfafdafdafad"
                     android:textColor="@color/colorPrimary"
-                    />
-
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/publishedDateValue" />
 
                 <TextView
                     android:id="@+id/industryIdentifiersLabel"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/description"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
                 <TextView
                     android:id="@+id/readingMode"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/industryIdentifiersLabel"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/industryIdentifiersLabel" />
+
                 <TextView
                     android:id="@+id/pageCount"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/readingMode"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/readingMode" />
+
                 <TextView
                     android:id="@+id/printType"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/pageCount"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pageCount" />
+
                 <TextView
                     android:id="@+id/maturityRating"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/printType"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/printType" />
 
                 <TextView
                     android:id="@+id/allowAnonLogging"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/maturityRating"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.75"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/maturityRating" />
+
                 <TextView
                     android:id="@+id/panelizationSummary"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/allowAnonLogging"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/allowAnonLogging" />
 
 
                 <RelativeLayout
                     android:id="@+id/imageLinks"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/panelizationSummary"
-                    >
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/panelizationSummary">
 
                 </RelativeLayout>
 
 
                 <TextView
                     android:id="@+id/language"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageLinks"
-                    android:textSize="@dimen/label_size"
-                    android:textColor="@color/colorPrimary"
-                    />
-                <TextView
-                    android:id="@+id/previewLink"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:padding="@dimen/activity_padding_primary"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageLinks" />
+
+                <Button
+                    android:id="@+id/previewLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Preview link"
                     android:layout_below="@+id/language"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:autoLink="all"
                     android:onClick="onClick"
-                    android:textColor="@color/colorPrimary"
-                    />
-                <TextView
-                    android:id="@+id/infoLink"
+                    android:textColor="@color/search_input_background_color"
+                    android:tag="1"
                     android:padding="@dimen/activity_padding_primary"
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/language" />
+
+                <Button
+                    android:id="@+id/infoLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/previewLink"
-                    android:textSize="@dimen/label_size"
-                    android:autoLink="all"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/colorPrimary"
                     android:onClick="onClick"
-                    android:textColor="@color/colorPrimary"
-                    />
-                <TextView
-                    android:id="@+id/canonicalVolumeLink"
                     android:padding="@dimen/activity_padding_primary"
+                    android:textColor="@color/search_input_background_color"
+                    android:tag="2"
+                    android:text="Info link"
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/previewLink" />
+
+                <Button
+                    android:id="@+id/canonicalVolumeLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/infoLink"
-                    android:textSize="@dimen/label_size"
-                    android:autoLink="all"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/colorPrimary"
                     android:onClick="onClick"
-                    android:textColor="@color/colorPrimary"
-                    />
+                    android:textColor="@color/search_input_background_color"
+                    android:padding="@dimen/activity_padding_primary"
+                    android:tag="3"
+                    android:text="Canonical Volume"
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/infoLink" />
+
                 <TextView
                     android:id="@+id/subtitle"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/canonicalVolumeLink"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/canonicalVolumeLink" />
+
                 <TextView
                     android:id="@+id/averageRating"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/subtitle"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
                 <TextView
                     android:id="@+id/ratingsCount"
-                    android:padding="@dimen/activity_padding_primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/averageRating"
-                    android:textSize="@dimen/label_size"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="@dimen/activity_padding_primary"
                     android:textColor="@color/colorPrimary"
-                    />
+                    android:textSize="@dimen/label_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/averageRating" />
 
                 <Button
                     android:id="@+id/shareBook"
                     android:layout_width="match_parent"
-                    android:layout_margin="30dp"
                     android:layout_height="60dp"
                     android:layout_below="@+id/ratingsCount"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textColor="@color/search_input_background_color"
+                    android:layout_margin="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     android:onClick="onClick"
+                    android:tag="4"
+                    android:text="Share with friends"
+                    android:textColor="@color/search_input_background_color"
                     android:textSize="18sp"
-                    android:text="Share with friends"/>
-            </RelativeLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingsCount" />
+
+
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
 

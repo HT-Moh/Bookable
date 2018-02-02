@@ -14,7 +14,6 @@ import java.io.File;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,12 +25,12 @@ public class RetrofitBuilder {
     public static final String BASE_URL = "https://www.googleapis.com/";
 
     /**
-     * Getting OAuthServer instance using Retrofit creation
+     * Getting RestCalls instance using Retrofit creation
      * A basic client to make unauthenticated calls
      * @param ctx
      * @return OAuthServerIntf instance
      */
-    public static OAuthServer getSimpleClient(Context ctx, Boolean RxJavaAdapter) {
+    public static RestCalls getSimpleClient(Context ctx, Boolean RxJavaAdapter) {
 
         //Using Default HttpClient
         Retrofit retrofit;
@@ -53,18 +52,16 @@ public class RetrofitBuilder {
                     .build();
         }
 
-        return retrofit.create(OAuthServer.class);
+        return retrofit.create(RestCalls.class);
     }
 
     /**
      * An autenticated client to make authenticated calls
      * The token is automaticly added in the Header of the request
      * @param ctx
-     * @return OAuthServer instance
+     * @return RestCalls instance
      */
-    protected static OAuthServer getOAuthClient(Context ctx) {
-        // now it's using the cach
-        // Using my HttpClient
+    protected static RestCalls getOAuthClient(Context ctx) {
         Retrofit raCustom = new Retrofit.Builder()
                 .client(getOAuthOkHttpClient(ctx))
                 .baseUrl(BASE_URL)
@@ -73,7 +70,7 @@ public class RetrofitBuilder {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return raCustom.create(OAuthServer.class);
+        return raCustom.create(RestCalls.class);
     }
 
 
@@ -91,8 +88,8 @@ public class RetrofitBuilder {
         // Let's use the cache.
         int cacheSize=1024*1024;
         Cache cacheDir=new Cache(myCacheDir,cacheSize);
-        HttpLoggingInterceptor httpLogInterceptor=new HttpLoggingInterceptor();
-        httpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //HttpLoggingInterceptor httpLogInterceptor=new HttpLoggingInterceptor();
+        //httpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 //add a cache
                   .cache(cacheDir)
@@ -118,8 +115,8 @@ public class RetrofitBuilder {
         Cache cacheDir=new Cache(myCacheDir,cacheSize);
         //TODO Implement DI for the intrceptor
         Interceptor oAuthInterceptor=new OAuthInterceptor();
-        HttpLoggingInterceptor httpLogInterceptor=new HttpLoggingInterceptor();
-        httpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //HttpLoggingInterceptor httpLogInterceptor=new HttpLoggingInterceptor();
+        //httpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 .cache(cacheDir)
                 .addInterceptor(oAuthInterceptor)

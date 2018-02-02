@@ -34,7 +34,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import io.paperdb.Paper;
 import io.reactivex.Observable;
 
 import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
@@ -43,7 +42,7 @@ import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
  * Created by HT-Moh on 18.12.17.
  */
 
-public class BooksRecycledListView extends BaseActivity implements BooksAdapter.OnItemLongClickListener {
+public class BooksRecycledListView extends BaseActivity implements BooksAdapter.OnItemLongClickListener, HandleApiResponses {
 
     private static final String TAG = "BooksRecycledListView";
 
@@ -166,23 +165,30 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
                     }
                 })
         );
+        items = new ArrayList<Item>();
+        mAdapter = new BooksAdapter(items,this);
+        mAdapter.setItems(items);
+        mRecyclerView.setAdapter(mAdapter);
+        reactiveCall(defaultSearchText);
+
     }
 
     @Override protected void onResume(){
         super.onResume();
-        if (items==null){
-            //using DB to speed up the first loading instead of network
-            items=  Paper.book().read("BOOKS");
-            //Make a copy - using memory to speed the loading in the future
-            longListOfBooks = new ArrayList<>(items);
-        }
-        if (items!=null){
-            mAdapter = new BooksAdapter(items,this);
-            mRecyclerView.setAdapter(mAdapter);
-        }
-        else {
-            reactiveCall(defaultSearchText);
-        }
+//        if (items==null){
+//            //using DB to speed up the first loading instead of network
+//            items=  Paper.book().read("BOOKS");
+//            //Make a copy - using memory to speed the loading in the future
+//            longListOfBooks = new ArrayList<>(items);
+//        }
+//        if (items!=null){
+//            mAdapter = new BooksAdapter(items,this);
+//            mRecyclerView.setAdapter(mAdapter);
+//        }
+//        else {
+//            reactiveCall(defaultSearchText);
+//        }
+    //    reactiveCall(defaultSearchText);
     }
 
     @Override public boolean onItemLongClicked(int position){
@@ -193,16 +199,19 @@ public class BooksRecycledListView extends BaseActivity implements BooksAdapter.
     }
 
 
-    public void handleResponse(Volumes response){
-        if (response!=null){
-            items = response.items;
+    public void handleResponse(Object response){
+        if (response!=null && response instanceof Volumes){
+            int positionStart = items.size()+1;
+            items.addAll(((Volumes)response).items);
 
-            runOnUiThread(new Runnable() {
-                @Override public void run() {
+            mRecyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    // Notify adapter with appropriate notify methods
                     mAdapter.setItems(items);
+                    mAdapter.notifyItemRangeInserted(positionStart,((Volumes)response).items.size());
                 }
             });
-
             //Quick dirty setting :-)
             if (!isSearchPreviewDisabled){
                 CharSequence newSuggestions = "";

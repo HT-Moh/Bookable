@@ -24,7 +24,7 @@ public final  class Constants {
     /**
      * Client id from google console
      */
-    public static final String CLIENT_ID = "335158165520-dhivh6uniatvd0r14rnrkgpc2igg505s.apps.googleusercontent.com";
+    public static final String CLIENT_ID = "UPDATE WITH CLIENT ID";
     /**
      * Redirect url Defined on google consolde
      */
@@ -38,7 +38,7 @@ public final  class Constants {
      * Default credetials from google console
      */
 
-    public static final String KEY = "AIzaSyAxsSeJtwoHPy1vRaZaIvKWYMT5SJvY7eE";
+    public static final String KEY = "UPDATE WITH YOUR GOOGLE API KEY";
     /**
      * Asking to use a code when autorizing
      */

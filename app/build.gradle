@@ -114,6 +114,8 @@ dependencies {
     compile 'com.github.robertsimoes:Shareable:0.1.0'
     compile 'de.cketti.mailto:email-intent-builder:1.0.0'
     compile 'com.github.pwittchen:reactivenetwork-rx2:0.12.2'
+    compile 'lt.neworld:spanner:v0.3.2'
+
   //  compile 'com.github.glomadrian:Grav:1.1'
 }
 //AIzaSyAxsSeJtwoHPy1vRaZaIvKWYMT5SJvY7eE

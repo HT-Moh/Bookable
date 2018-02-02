@@ -30,7 +30,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
     Context context;
 
     public void setItems(List<Item> items){
-        this.items.clear();
+        //this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();
     }
@@ -58,7 +58,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
     public void onBindViewHolder(Book bookHolder, int i) {
         VolumeInfo volumeinfo = items.get(i).getVolumeInfo();
         bookHolder.title.setText(volumeinfo.getTitle());
-        bookHolder.author.setText((volumeinfo!=null && volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)?volumeinfo.getAuthors().get(0):"");
+        bookHolder.author.setText((volumeinfo!=null && volumeinfo.getAuthors()!=null && volumeinfo.getAuthors().size()>0)?volumeinfo.getAuthors().get(0).trim():"");
         if(volumeinfo!=null && volumeinfo.getImageLinks()!=null && volumeinfo.getImageLinks().getSmallThumbnail()!=null){
             Glide.with(context)
                     .load(volumeinfo.getImageLinks().getSmallThumbnail())

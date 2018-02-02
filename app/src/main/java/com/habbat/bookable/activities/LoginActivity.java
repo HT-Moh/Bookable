@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.habbat.bookable.Constants;
 import com.habbat.bookable.R;
-import com.habbat.bookable.retrofit.OAuthServer;
 import com.habbat.bookable.retrofit.OAuthToken;
+import com.habbat.bookable.retrofit.RestCalls;
 import com.habbat.bookable.retrofit.RetrofitBuilder;
 
 import okhttp3.HttpUrl;
@@ -28,6 +28,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
+    private RestCalls restCalls = null;
 
 
     /***********************************************************
@@ -37,8 +38,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Implement efresh token on background before it expires to prevent asking the user for autorization each time
+        //TODO Implement refresh token on background before it expires to prevent asking the user for autorization each time
         //Manage the callback case:
+        restCalls = RetrofitBuilder.getSimpleClient(this,false);
 
     }
 
@@ -122,8 +124,7 @@ public class LoginActivity extends AppCompatActivity {
      */
 
     private void refreshTokenFormUrl(OAuthToken oauthToken) {
-        OAuthServer oAuthServer = RetrofitBuilder.getSimpleClient(this,false);
-        Call<OAuthToken> refreshTokenFormCall = oAuthServer.refreshTokenForm(
+        Call<OAuthToken> refreshTokenFormCall = restCalls.refreshTokenForm(
                 oauthToken.getRefreshToken(),
                 Constants.CLIENT_ID,
                 Constants.GRANT_TYPE_REFRESH_TOKEN
@@ -152,8 +153,7 @@ public class LoginActivity extends AppCompatActivity {
      */
 
     private void getTokenFormUrl() {
-        OAuthServer oAuthServer = RetrofitBuilder.getSimpleClient(this,false);
-        Call<OAuthToken> getRequestTokenFormCall = oAuthServer.requestTokenForm(
+        Call<OAuthToken> getRequestTokenFormCall = restCalls.requestTokenForm(
                 Constants.code,
                 Constants.CLIENT_ID,
                 Constants.REDIRECT_URI,

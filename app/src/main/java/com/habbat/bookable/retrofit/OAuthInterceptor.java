@@ -1,7 +1,9 @@
-package com.habbat.bookable.retrofit; /**
+package com.habbat.bookable.retrofit;
+/**
  * Bookable: Google book API
  * Created by HT-Moh on 15.12.17.
  * www.habbat.ch Habbat C&D
+ *
  */
 
 
@@ -14,6 +16,11 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ *
+ *OAuthInterceptor interceptor responsible to add access token to rest calls
+ *
+ */
 
 public class OAuthInterceptor implements Interceptor {
     private static final String TAG = "OAuthInterceptor";

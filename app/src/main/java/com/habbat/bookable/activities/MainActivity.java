@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -11,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
@@ -37,7 +37,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HandleApiResponses {
 
     private static final String TAG = "MainActivity";
 
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.txvResult)
     TextView txvResult;
     @BindView(R.id.activity_main_ll)
-    LinearLayout mainLL;
+    ConstraintLayout mainLL;
     AnimationDrawable animationDrawable = null;
     @BindView(R.id.internetStatus)
     TextView internetStatus = null;
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     //Inject API Service
     @Inject
     RetrofitNetworkServiceApi retrofitNetworkServiceApi;
-
     private Disposable networkDisposable;
     private Disposable internetDisposable;
 
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         internetDisposable = ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isConnected -> internetStatus.setText( isConnected?"Info":"No internet connection is available"));
+                .subscribe(isConnected -> internetStatus.setText( isConnected?"Internet connection is available":"No internet connection is available"));
     }
 
     @Override
@@ -184,12 +183,13 @@ public class MainActivity extends AppCompatActivity {
     private void reactiveCall(String query){
         retrofitNetworkServiceApi.call(Constants.ApiCalls.GETVOLUMES, this, query);
     }
-    public void handleResponse(Volumes response){
-        if (response!=null){
+    public void handleResponse(Object response){
+        if (response!=null && response instanceof Volumes){
+            //response = (Volumes)response;
             if (items==null){
                 items = new ArrayList<>();
             }
-            items.addAll(response.items);
+            items.addAll(((Volumes)response).items);
             items = items.stream().distinct().collect(Collectors.toList());
             //TODO
             //we copy the items to prevent thread lock

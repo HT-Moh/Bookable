@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,90 +9,120 @@
     tools:ignore="UnusedAttribute">
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/cv"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            >
+            android:padding="5dp">
 
             <ImageView
-                android:layout_width="@dimen/image_width"
-                android:layout_height="@dimen/image_height"
                 android:id="@+id/bookPhoto"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/activity_padding_primary"
-                />
+                android:layout_width="@dimen/image_width"
+                android:layout_height="120dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/bookImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="@dimen/default_label"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/bookPhoto"
+                android:text="@string/titleLabel"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/label_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/bookTitle"
-                android:paddingRight="@dimen/activity_padding_primary"
-                android:paddingLeft="@dimen/activity_padding_primary"
-                android:paddingBottom="@dimen/activity_padding_primary"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/bookPhoto"
                 android:layout_alignParentTop="true"
-                android:textSize="@dimen/label_size"
-                android:text="title"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/title"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorPrimaryDark"
-                />
+                android:textSize="@dimen/label_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/authorLabel"
-                android:padding="@dimen/activity_padding_primary"
                 android:layout_width="@dimen/default_label"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bookTitle"
-                android:layout_toRightOf="@+id/bookPhoto"
+                android:layout_below="@id/title"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/bookPhoto"
+                android:text="@string/authorLabel"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/label_size"
                 android:textStyle="bold"
-                android:text="Author"
-                android:textColor="@color/colorPrimary"
-
-                />
+                android:textAlignment="textStart"
+                app:layout_constraintBaseline_toBaselineOf="@id/author"
+                app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <TextView
                 android:id="@+id/author"
-                android:padding="@dimen/activity_padding_primary"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/bookTitle"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
                 android:layout_toEndOf="@+id/authorLabel"
-                android:text="Mohamed"
-                android:textSize="@dimen/label_size"
+                android:text="No author"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorPrimary"
-                />
+                android:textSize="@dimen/label_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/authorLabel"
+                app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
+
             <TextView
                 android:id="@+id/kindLabel"
-                android:padding="@dimen/activity_padding_primary"
                 android:layout_width="@dimen/default_label"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/author"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
                 android:layout_toEndOf="@+id/bookPhoto"
+                android:text="@string/bookKind"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/label_size"
                 android:textStyle="bold"
-                android:text="Kind"
-                android:textColor="@color/colorPrimary"
-                />
+                android:textAlignment="textStart"
+                app:layout_constraintStart_toEndOf="@+id/bookPhoto"
+                app:layout_constraintBaseline_toBaselineOf="@id/kind"
+
+                app:layout_constraintTop_toBottomOf="@+id/authorLabel" />
 
             <TextView
                 android:id="@+id/kind"
-                android:padding="@dimen/activity_padding_primary"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/author"
                 android:layout_toEndOf="@+id/kindLabel"
-                android:text="Mohamed"
-                android:textSize="@dimen/label_size"
                 android:textColor="@color/colorPrimary"
-                />
-        </RelativeLayout>
+                android:textSize="@dimen/label_size"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/kindLabel"
+                app:layout_constraintTop_toBottomOf="@+id/author" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 

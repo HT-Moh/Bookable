@@ -4,10 +4,9 @@ import android.content.Context;
 
 import com.habbat.bookable.Constants;
 import com.habbat.bookable.activities.BooksRecycledListView;
+import com.habbat.bookable.activities.HandleApiResponses;
 import com.habbat.bookable.activities.MainActivity;
 import com.habbat.bookable.models.Volumes;
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -62,26 +61,12 @@ public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
      * @param  query search text for book
      */
     private Disposable getVolumesOAuth(String query){
-        OAuthServer server= RetrofitBuilder.getOAuthClient(context);
+        RestCalls server= RetrofitBuilder.getOAuthClient(context);
         Observable<Volumes> volumes = server.listVolumes(query);
-//        return volumes.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .delay(2,TimeUnit.SECONDS)
-//                .subscribe(response -> ((AsyncResponseDelegate)context).handleResponse(response), error -> ((AsyncResponseDelegate)context).handleError(error));
-//
-//
-        if (context instanceof MainActivity){
-            return volumes.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    //.delay(2,TimeUnit.SECONDS)
-                    .subscribe(response -> ((MainActivity)context).handleResponse(response), error -> ((MainActivity)context).handleError(error));
-        }
-        else {
-            return volumes.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                   // .delay(2,TimeUnit.SECONDS)
-                    .subscribe(response -> ((BooksRecycledListView)context).handleResponse(response), error -> ((BooksRecycledListView)context).handleError(error));
-        }
+        return volumes.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                //.delay(2,TimeUnit.SECONDS)
+                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((MainActivity)context).handleError(error));
     }
     /**
      * Call API volumes using reactive and key
@@ -91,20 +76,11 @@ public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
      * @param  query search text for book
      */
     private Disposable getVolumes(String query){
-       OAuthServer server=RetrofitBuilder.getSimpleClient(context,true);
+       RestCalls server= RetrofitBuilder.getSimpleClient(context,true);
        Observable<Volumes> volumes = server.listVolumes(query,Constants.KEY);
-
-        if (context instanceof MainActivity){
-            return volumes.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .delay(5,TimeUnit.SECONDS)
-                    .subscribe(response -> ((MainActivity)context).handleResponse(response), error -> ((MainActivity)context).handleError(error));
-        }
-        else {
-            return volumes.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .delay(5,TimeUnit.SECONDS)
-                    .subscribe(response -> ((BooksRecycledListView)context).handleResponse(response), error -> ((BooksRecycledListView)context).handleError(error));
-        }
+        return volumes.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                //  .delay(5,TimeUnit.SECONDS)
+                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((BooksRecycledListView)context).handleError(error));
     }
 }

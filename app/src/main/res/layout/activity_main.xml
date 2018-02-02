@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_ll"
     android:layout_width="match_parent"
@@ -11,62 +12,99 @@
     android:orientation="vertical"
     android:background="@drawable/animation_list"
     tools:context="com.habbat.bookable.activities.MainActivity">
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Google Books API"
         android:textAlignment="center"
-        android:gravity="center"
-        android:layout_margin="20dp"
         android:textColor="@color/search_input_background_color"
         android:textSize="@dimen/main_title"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/getYourVolumes"
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
+        android:text="Get books (OAuth2 sign in)"
         android:textColor="@color/search_input_background_color"
-        android:text="Get books (OAuth2 sign in)"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <Button
         android:id="@+id/getVolumes"
         android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_height="60dp"
-        android:textColor="@color/search_input_background_color"
+        android:layout_margin="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Get books"/>
+        android:text="Get books"
+        android:textColor="@color/search_input_background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getYourVolumes" />
+
     <TextView
         android:id="@+id/internetStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scrollbars="vertical"
-        android:text="@string/info"
-        android:textSize="18sp"
+        android:text="@string/internetStatus"
         android:textColor="@color/colorAccent"
-        />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getVolumes" />
+
     <TextView
         android:id="@+id/txvResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scrollbars="vertical"
         android:text="@string/info"
-        android:textSize="18sp"
         android:textColor="@color/search_input_background_color"
-        />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/internetStatus" />
+
     <Button
         android:id="@+id/sendMail"
         android:layout_width="match_parent"
-        android:layout_margin="30dp"
         android:layout_height="60dp"
+        android:layout_margin="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/search_input_background_color"
         android:onClick="sendMail"
+        android:text="Contact me"
+        android:textColor="@color/search_input_background_color"
         android:textSize="18sp"
-        android:text="Contact me"/>
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvResult" />
+
+</android.support.constraint.ConstraintLayout>
