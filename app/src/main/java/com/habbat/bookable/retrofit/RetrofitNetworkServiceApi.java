@@ -3,9 +3,7 @@ package com.habbat.bookable.retrofit;
 import android.content.Context;
 
 import com.habbat.bookable.Constants;
-import com.habbat.bookable.activities.BooksRecycledListView;
 import com.habbat.bookable.activities.HandleApiResponses;
-import com.habbat.bookable.activities.MainActivity;
 import com.habbat.bookable.models.Volumes;
 
 import javax.inject.Inject;
@@ -66,7 +64,7 @@ public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
         return volumes.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 //.delay(2,TimeUnit.SECONDS)
-                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((MainActivity)context).handleError(error));
+                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((HandleApiResponses)context).handleError(error));
     }
     /**
      * Call API volumes using reactive and key
@@ -81,6 +79,6 @@ public class RetrofitNetworkServiceApi implements RetrofitNetworkService{
         return volumes.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 //  .delay(5,TimeUnit.SECONDS)
-                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((BooksRecycledListView)context).handleError(error));
+                .subscribe(response -> ((HandleApiResponses)context).handleResponse(response), error -> ((HandleApiResponses)context).handleError(error));
     }
 }

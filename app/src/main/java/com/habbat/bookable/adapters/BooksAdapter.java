@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.habbat.bookable.R;
-import com.habbat.bookable.activities.BooksRecycledListView;
 import com.habbat.bookable.models.Item;
 import com.habbat.bookable.models.VolumeInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,20 +27,20 @@ import butterknife.ButterKnife;
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
 
     private List<Item> items;
+
     Context context;
 
     public void setItems(List<Item> items){
-        //this.items.clear();
+        int positionStart = items.size()+1;
         this.items.addAll(items);
-        notifyDataSetChanged();
+        this.notifyItemRangeInserted(positionStart,items.size());
+    }
+    public Item getBook(int position){
+       return this.items.get(position);
     }
 
-    public interface OnItemLongClickListener {
-        boolean onItemLongClicked(int position);
-    }
-
-    public BooksAdapter(List<Item> items, Context context){
-        this.items = items;
+    public BooksAdapter(Context context){
+        this.items = new ArrayList<Item>();
         this.context = context;
     }
     @Override
@@ -65,13 +65,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.Book>{
                     .into(bookHolder.bookPhoto);
         }
         bookHolder.kind.setText(items.get(i).getKind());
-        bookHolder.cv.setOnLongClickListener(new View.OnLongClickListener() {
+       /* bookHolder.cv.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 BooksRecycledListView bookActivity = (BooksRecycledListView)context;
                 return bookActivity.onItemLongClicked(i);
             }
-        });
+        });*/
     }
 
     @Override

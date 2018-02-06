@@ -8,4 +8,5 @@ package com.habbat.bookable.activities;
 
 public interface HandleApiResponses {
     void handleResponse(Object response);
+    void handleError(Throwable error);
 }
